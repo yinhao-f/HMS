@@ -23,14 +23,11 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "Name: " + firstName + ' ' +
+        return "Name: " + firstName + ' ' +
                 lastName +
                 ", Patient ID: " + patientId +
                 ", Age: " + age +
-                ", Gender: " + gender +
-                ", Notes: " + notes +
-                '}';
+                ", Gender: " + gender;
     }
 
     // Getters and setters
