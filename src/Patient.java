@@ -23,7 +23,7 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "Name: " + firstName + ' ' +
+        return "Name: " + firstName + " " +
                 lastName +
                 ", Patient ID: " + patientId +
                 ", Age: " + age +
@@ -83,5 +83,9 @@ public class Patient {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }
