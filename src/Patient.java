@@ -19,6 +19,8 @@ public class Patient {
         this.notes = notes;
     }
 
+    public Patient() {}
+
     @Override
     public String toString() {
         return "{Name: " + firstName + " " +

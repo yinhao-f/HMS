@@ -13,6 +13,18 @@ public class Patients {
         patientList.add(patient);
     }
 
+    public Patient findById(int id) {
+        for (Patient patient :
+                patientList) {
+            if (patient.getPatientId() == id) {
+                return patient;
+            }
+        }
+
+        // No patient is found; return empty patient
+        return new Patient();
+    }
+
     public ArrayList<Patient> findByLastName(String lastName) {
         ArrayList<Patient> matchingLastName = new ArrayList<Patient>();
         // TODO: replace with a binary search
@@ -48,13 +60,15 @@ public class Patients {
         return matchingAgeRange;
     }
 
-    public void removePatient(long patientId) {
+    public Patient removePatient(int patientId) {
         for (int i = 0; i < patientList.size(); i++) {
             if (patientList.get(i).getPatientId() == patientId) {
+                Patient removed = patientList.get(i);
                 patientList.remove(i);
-                break;
+                return removed;
             }
         }
+        return new Patient();
     }
 
     public int getNumOfPatients() {

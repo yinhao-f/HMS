@@ -17,7 +17,7 @@ public class Menu {
             System.out.println("3. Find a patient by last name");
             System.out.println("4. Find a patient by first name");
             System.out.println("5. Find a patient by age range");
-            System.out.println("6. Delete a patient by ID");
+            System.out.println("6. Remove a patient by ID");
             System.out.println("0. Quit");
             System.out.println();
             System.out.print("Please enter a number: ");
@@ -44,7 +44,12 @@ public class Menu {
                     removePatient();
                     break;
                 case 0:
-                    return;
+                    if (confirmQuit()) {
+                        System.out.println("Goodbye!");
+                        return;
+                    }
+                    System.out.println("************************************************************************");
+                    break;
                 default:
                     // User did not enter a valid number
                     System.out.println("Invalid choice; please try again. ");
@@ -92,13 +97,79 @@ public class Menu {
         System.out.println("************************************************************************");
     }
 
-    private void findById() {}
+    private void findById() {
+        System.out.println("Finding patient by ID");
+        System.out.print("Please enter the patient's ID: ");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        scanner.nextLine();
 
-    private void findByLastName() {}
+        System.out.println(patients.findById(id));
+        System.out.print("Press enter to return to the main menu");
+        scanner.nextLine();
+        System.out.println("************************************************************************");
+    }
 
-    private void findByFirstName() {}
+    private void findByLastName() {
+        System.out.println("Finding patient by last name");
+        System.out.print("Please enter the patient's last name: ");
+        Scanner scanner = new Scanner(System.in);
+        String lastName = scanner.nextLine();
 
-    private void findByAgeRange() {}
+        System.out.println(patients.findByLastName(lastName));
+        System.out.print("Press enter to return to the main menu");
+        scanner.nextLine();
+        System.out.println("************************************************************************");
+    }
 
-    private void removePatient() {}
+    private void findByFirstName() {
+        System.out.println("Finding patient by first name");
+        System.out.print("Please enter the patient's first name: ");
+        Scanner scanner = new Scanner(System.in);
+        String firstName = scanner.nextLine();
+
+        System.out.println(patients.findByFirstName(firstName));
+        System.out.print("Press enter to return to the main menu");
+        scanner.nextLine();
+        System.out.println("************************************************************************");
+    }
+
+    private void findByAgeRange() {
+        System.out.println("Finding patient by age range");
+        System.out.print("Please enter the minimum age: ");
+        Scanner scanner = new Scanner(System.in);
+        int min = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Please enter the maximum age, enter the same number if searching for a single age: ");
+        int max = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println(patients.findByAgeRange(min, max));
+        System.out.print("Press enter to return to the main menu");
+        scanner.nextLine();
+        System.out.println("************************************************************************");
+    }
+
+    private void removePatient() {
+        System.out.println("Removing a patient");
+        System.out.print("Please enter the patient's ID to be removed: ");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Patient removed! " + patients.removePatient(id));
+        System.out.print("Press enter to return to the main menu");
+        scanner.nextLine();
+        System.out.println("************************************************************************");
+    }
+
+    private boolean confirmQuit() {
+        System.out.print("Are you sure to exit? (Y/N) ");
+        Scanner scanner = new Scanner(System.in);
+        if (scanner.nextLine().equalsIgnoreCase("Y")) {
+            return true;
+        }
+        return false;
+    }
 }
