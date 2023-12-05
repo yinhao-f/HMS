@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Patients {
     private ArrayList<Patient> patientList;
-    private long numOfPatients; // might be replaced by size()
+    // private long numOfPatients; // might be replaced by size()
 
     public Patients() {
         this.patientList = new ArrayList<Patient>();
@@ -55,6 +55,10 @@ public class Patients {
                 break;
             }
         }
+    }
+
+    public long getNumOfPatients() {
+        return patientList.size();
     }
 
     @Override
