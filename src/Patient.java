@@ -1,9 +1,7 @@
-import java.text.DateFormat;
-
 public class Patient {
     private String firstName;
     private String lastName;
-    private long patientId;
+    private int patientId;
 
     // TODO: store the patient's birth date a Date type so the age will be consistent with time
     // private Date patientBirthDate;
@@ -12,7 +10,7 @@ public class Patient {
     private String notes;
 
     // TODO: age to be removed
-    public Patient(String firstName, String lastName, long patientId, int age, Gender gender, String notes) {
+    public Patient(String firstName, String lastName, int patientId, int age, Gender gender, String notes) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.patientId = patientId;
@@ -25,7 +23,7 @@ public class Patient {
     public String toString() {
         return "{Name: " + firstName + " " +
                 lastName +
-                ", Patient ID: " + patientId +
+                ", Patient ID: " + String.format("%010d", patientId) +
                 ", Age: " + age +
                 ", Gender: " + gender +
                 "}";
@@ -48,11 +46,11 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public long getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(long patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 

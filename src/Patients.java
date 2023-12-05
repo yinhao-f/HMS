@@ -57,7 +57,7 @@ public class Patients {
         }
     }
 
-    public long getNumOfPatients() {
+    public int getNumOfPatients() {
         return patientList.size();
     }
 
