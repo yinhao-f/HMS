@@ -9,8 +9,26 @@ public class Patients {
     }
 
     public void addPatient(Patient patient) {
-        // TODO: add patient in alphabetical order of last name
-        patientList.add(patient);
+        // Add patient in alphabetical order of last name
+        int lowerBound = 0;
+        int upperBound = patientList.size();
+        int i = patientList.size() / 2;
+        int compare;
+        while ((upperBound - lowerBound) > 0) {
+            compare = patient.compareTo(patientList.get(i));
+            if (compare > 0) {
+                // go higher
+                lowerBound = i + 1; // when the number of remaining elements is 2, skip the one already compared
+                i = (upperBound + lowerBound) / 2;
+            } else if (compare < 0) {
+                // go lower
+                upperBound = i;
+                i = (upperBound + lowerBound) / 2;
+            } else {
+                break;
+            }
+        }
+        patientList.add(i, patient);
     }
 
     public Patient findById(int id) {
