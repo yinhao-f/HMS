@@ -86,7 +86,7 @@ public class Menu {
         System.out.print("Please enter additional notes if any: ");
         String notes = scanner.nextLine();
 
-        int id = patients.getNumOfPatients();
+        int id = patients.getIdNumber();
 
         Patient patient = new Patient(firstName, lastName, id, age, gender, notes);
         patients.addPatient(patient);

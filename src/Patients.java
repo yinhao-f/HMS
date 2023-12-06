@@ -3,10 +3,11 @@ import java.util.List;
 
 public class Patients {
     private ArrayList<Patient> patientList;
-    // private long numOfPatients; // might be replaced by size()
+    private int idNumber;
 
     public Patients() {
         this.patientList = new ArrayList<Patient>();
+        idNumber = 0;
     }
 
     public void addPatient(Patient patient) {
@@ -30,6 +31,7 @@ public class Patients {
             }
         }
         patientList.add(i, patient);
+        idNumber++;
     }
 
     public Patient findById(int id) {
@@ -152,8 +154,8 @@ public class Patients {
         return new Patient();
     }
 
-    public int getNumOfPatients() {
-        return patientList.size();
+    public int getIdNumber() {
+        return idNumber;
     }
 
     @Override
