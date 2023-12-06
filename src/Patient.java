@@ -1,4 +1,4 @@
-public class Patient {
+public class Patient implements Comparable<Patient> {
     private String firstName;
     private String lastName;
     private int patientId;
@@ -29,6 +29,11 @@ public class Patient {
                 ", Age: " + age +
                 ", Gender: " + gender +
                 "}";
+    }
+
+    @Override
+    public int compareTo(Patient patient) {
+        return this.lastName.compareTo(patient.lastName);
     }
 
     // Getters and setters
