@@ -45,10 +45,8 @@ public class Menu {
                     break;
                 case 0:
                     if (confirmQuit()) {
-                        System.out.println("Goodbye!");
                         return;
                     }
-                    System.out.println("************************************************************************");
                     break;
                 default:
                     // User did not enter a valid number
@@ -81,9 +79,9 @@ public class Menu {
             gender = Gender.FEMALE;
         } else if (genderInput.equalsIgnoreCase("M")) {
             gender = Gender.MALE;
-        } // TODO: tell the user if input is invalid
+        }
 
-        System.out.print("Please enter additional notes if any: ");
+        System.out.print("Please enter additional notes, or press enter to skip: ");
         String notes = scanner.nextLine();
 
         int id = patients.getIdNumber();
@@ -168,8 +166,10 @@ public class Menu {
         System.out.print("Are you sure to exit? (Y/N) ");
         Scanner scanner = new Scanner(System.in);
         if (scanner.nextLine().equalsIgnoreCase("Y")) {
+            System.out.println("Goodbye!");
             return true;
         }
+        System.out.println("************************************************************************");
         return false;
     }
 }

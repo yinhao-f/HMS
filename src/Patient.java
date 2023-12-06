@@ -2,14 +2,10 @@ public class Patient {
     private String firstName;
     private String lastName;
     private int patientId;
-
-    // TODO: store the patient's birth date a Date type so the age will be consistent with time
-    // private Date patientBirthDate;
     private int age;
     private Gender gender;
     private String notes;
 
-    // TODO: age to be removed
     public Patient(String firstName, String lastName, int patientId, int age, Gender gender, String notes) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,12 +15,10 @@ public class Patient {
         this.notes = notes;
     }
 
-    public Patient() {}
-
     @Override
     public String toString() {
-        return "{Name: " + firstName + " " +
-                lastName +
+        return "{First name: " + firstName +
+                ", Last name: " + lastName +
                 ", Patient ID: " + String.format("%010d", patientId) +
                 ", Age: " + age +
                 ", Gender: " + gender +
@@ -60,16 +54,10 @@ public class Patient {
         this.patientId = patientId;
     }
 
-//    public void setPatientBirthDate(Date patientBirthDate) {
-//        this.patientBirthDate = patientBirthDate;
-//    }
-
-    // TODO: calculate age based on the birth date and current date
     public int getAge() {
         return age;
     }
 
-    // TODO: to be removed once the birth date is implemented
     public void setAge(int age) {
         this.age = age;
     }

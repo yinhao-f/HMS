@@ -42,8 +42,8 @@ public class Patients {
             }
         }
 
-        // No patient is found; return empty patient
-        return new Patient();
+        // No patient is found; return null
+        return null;
     }
 
     public List<Patient> findByLastName(String lastName) {
@@ -58,7 +58,7 @@ public class Patients {
 //        }
 //        return matchingLastName;
 
-        // Two binary searches approach, O(2 log n)
+        // Two binary searches approach, O(log n)
         int lowerBound = 0;
         int upperBound = patientList.size();
         int compare;
@@ -124,7 +124,7 @@ public class Patients {
         ArrayList<Patient> matchingFirstName = new ArrayList<Patient>();
         for (Patient patient :
                 patientList) {
-            if (patient.getFirstName().equals(firstName)) {
+            if (patient.getFirstName().equalsIgnoreCase(firstName)) {
                 matchingFirstName.add(patient);
             }
         }
@@ -151,7 +151,8 @@ public class Patients {
                 return removed;
             }
         }
-        return new Patient();
+        // no patient found; return null
+        return null;
     }
 
     public int getIdNumber() {
