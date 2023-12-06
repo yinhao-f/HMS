@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Patients {
     private ArrayList<Patient> patientList;
@@ -15,7 +16,7 @@ public class Patients {
         int i = patientList.size() / 2;
         int compare;
         while ((upperBound - lowerBound) > 0) {
-            compare = patient.compareTo(patientList.get(i));
+            compare = patient.compareToIgnoreCase(patientList.get(i));
             if (compare > 0) {
                 // go higher
                 lowerBound = i + 1; // when the number of remaining elements is 2, skip the one already compared
@@ -43,16 +44,78 @@ public class Patients {
         return new Patient();
     }
 
-    public ArrayList<Patient> findByLastName(String lastName) {
-        ArrayList<Patient> matchingLastName = new ArrayList<Patient>();
-        // TODO: replace with a binary search
-        for (Patient patient :
-                patientList) {
-            if (patient.getLastName().equals(lastName)) {
-                matchingLastName.add(patient);
+    public List<Patient> findByLastName(String lastName) {
+        // Simple linear search approach, O(n)
+//        List<Patient> matchingLastName = new ArrayList<Patient>();
+//
+//        for (Patient patient :
+//                patientList) {
+//            if (patient.getLastName().equals(lastName)) {
+//                matchingLastName.add(patient);
+//            }
+//        }
+//        return matchingLastName;
+
+        // Two binary searches approach, O(2 log n)
+        int lowerBound = 0;
+        int upperBound = patientList.size();
+        int compare;
+
+        // First binary search finds the index of first occurrence of the last name
+        int firstOccur = (upperBound + lowerBound) / 2;
+        while ((upperBound - lowerBound) > 0) {
+            compare = lastName.compareToIgnoreCase(patientList.get(firstOccur).getLastName());
+            if (compare > 0) {
+                // go higher
+                lowerBound = firstOccur + 1;
+                firstOccur = (lowerBound + upperBound) / 2;
+            } else if (compare < 0) {
+                // go lower
+                upperBound = firstOccur;
+                firstOccur = (lowerBound + upperBound) / 2;
+            } else {
+                // found, check if it's first occurrence
+                if (firstOccur == 0) {
+                    // check if first element before performing firstOccur - 1 which would cause an error
+                    break;
+                } else if (patientList.get(firstOccur - 1).getLastName().equalsIgnoreCase(lastName)) {
+                    // not first occurrence, keep going left
+                    upperBound = firstOccur;
+                    firstOccur = (lowerBound + upperBound) / 2;
+                } else {
+                    break;
+                }
             }
         }
-        return matchingLastName;
+
+        // Second binary search finds the index of the last occurrence
+        lowerBound = firstOccur;
+        upperBound = patientList.size();
+        int lastOccur = (upperBound + lowerBound) / 2;
+        while ((upperBound - lowerBound) > 0) {
+            compare = lastName.compareToIgnoreCase(patientList.get(lastOccur).getLastName());
+            if (compare > 0) {
+                // go higher
+                lowerBound = lastOccur + 1;
+                lastOccur = (lowerBound + upperBound) / 2;
+            } else if (compare < 0) {
+                // go lower
+                upperBound = lastOccur;
+                lastOccur = (lowerBound + upperBound) / 2;
+            } else {
+                // check if it's last occurrence
+                if (lastOccur == patientList.size() - 1) {
+                    // last element
+                    break;
+                } else if (patientList.get(lastOccur + 1).getLastName().equalsIgnoreCase(lastName)) {
+                    lowerBound = lastOccur + 1;
+                    lastOccur = (lowerBound + upperBound) / 2;
+                } else {
+                    break;
+                }
+            }
+        }
+        return patientList.subList(firstOccur, lastOccur + 1); // range is exclusive on the second index
     }
 
     public ArrayList<Patient> findByFirstName(String firstName) {
